@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expenses Statement</title>
+</head>
+<body>
+    <h2>Expense Statement</h2>
+    
+    <!-- Filter by Date -->
+    <form method="post">
+        <label>From Date:</label>
+        <input type="date" name="from_date">
+        
+        <label>To Date:</label>
+        <input type="date" name="to_date">
+
+        <button type="submit">Filter</button>
+    </form>
+
+    <h3>Total Expenses: ₹{{ total_amount }}</h3>
+    
+    <!-- Expenses Table -->
+    <table border="1">
+        <tr>
+            <th>Expense Name</th>
+            <th>Amount (₹)</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+        {% for exp in expenses %}
+        <tr>
+            <td>{{ exp.name }}</td>
+            <td>₹{{ exp.amount }}</td>
+            <td>{{ exp.date }}</td>
+            <td><a href="{{ url_for('delete_expense', id=exp.id) }}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="/">Add Expense</a>
+</body>
+</html>
